@@ -32,6 +32,17 @@ arena_t *arena_create(size_t s) {
     return arena;
 }
 
-void *arena_alloc(arena_t *arena, size_t size) {
+void *arena_alloc(arena_t *arena, size_t s) {
+    if (!arena) {
+        return NULL;
+    }
 
+    if (arena->offset + s > arena->capacity) {
+        return NULL;
+    }
+
+    void *address = (unsigned char *)arena->buffer + arena->offset;
+    arena->offset += s;
+
+    return address;
 }
