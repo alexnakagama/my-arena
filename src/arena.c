@@ -14,8 +14,20 @@ struct arena_t {
     size_t offset;
 };
 
-arena_t *arena_create(size_t size) {
+arena_t *arena_create(size_t s) {
     arena_t *arena = malloc(sizeof(arena_t));
+    if (!arena) {
+        return NULL;
+    }
+
+    arena->buffer = malloc(s);
+    if (!arena->buffer) {
+        free(arena);
+        return NULL;
+    }
+
+    arena->capacity = s;
+    arena->offset = 0;
 
     return arena;
 }
