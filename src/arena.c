@@ -3,14 +3,19 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-struct Arena {
+/*
+    * void *buffer (points to the large block of memory that we allocated, here the arena starts)
+    * size_t capacity (indicates how many bytes has the block in total)
+    * size_t offset (indicates how many bytes were already utilized)
+*/
+struct arena_t {
     void *buffer;
     size_t capacity;
     size_t offset;
 };
 
-Arena *arena_create(size_t size) {
-    Arena *arena = malloc(sizeof(Arena));
+arena_t *arena_create(size_t size) {
+    arena_t *arena = malloc(sizeof(arena_t));
 
     return arena;
 }

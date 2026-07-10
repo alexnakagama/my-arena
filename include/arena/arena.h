@@ -3,17 +3,18 @@
 
 #include <stddef.h>
 
-typedef struct Arena Arena;
+typedef struct arena_t arena_t;
 
-Arena *arena_create(size_t size);
-void *arena_alloc(Arena *arena, size_t size);
-void arena_reset(Arena *arena);
-void arena_destroy(Arena *arena);
+arena_t *arena_create(size_t size);
+void *arena_alloc(arena_t *arena, size_t size);
+void arena_reset(arena_t *arena);
+void arena_destroy(arena_t *arena);
 
 #endif
 
 /*
  * An arena in C is a custom memory allocator that manages larges blocks of memory and gives smaller pieces of it to the program
+ * It doesnt frees individual objects, it all stays there until the arena is destroyed or reset
  *
  * How it works internally?
  * Memory looks internally:
