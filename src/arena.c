@@ -41,6 +41,7 @@ void *arena_alloc(arena_t *arena, size_t s) {
         return NULL;
     }
 
+    // Calcualtes where starts the new memory
     void *address = (unsigned char *)arena->buffer + arena->offset;
     arena->offset += s;
 
