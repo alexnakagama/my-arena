@@ -31,3 +31,7 @@ arena_t *arena_create(size_t s) {
 
     return arena;
 }
+
+void *arena_alloc(arena_t *arena, size_t size) {
+
+}
