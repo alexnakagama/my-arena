@@ -1,8 +1,0 @@
--Wall
--Wextra
--Wpedantic
--Werror
--std=c11
--g
--O0
--Iinclude
