@@ -26,5 +26,7 @@ void arena_destroy(Arena *arena);
                       offset
  *
  * When we request memory it returns buffer + offset, the offset goes moving
+ * Its pointer aritmetic
+ * Arena is like renting the whole building, using rooms when needed, demolishing building when its done
 */ 
 
