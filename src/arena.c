@@ -47,6 +47,10 @@ void *arena_alloc(arena_t *arena, size_t s) {
     return address;
 }
 
+void arena_reset(arena_t *arena) {
+
+}
+
 void arena_destroy(arena_t *arena) {
     if (!arena) {
         return;
