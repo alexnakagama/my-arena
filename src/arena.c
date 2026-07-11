@@ -48,7 +48,11 @@ void *arena_alloc(arena_t *arena, size_t s) {
 }
 
 void arena_reset(arena_t *arena) {
+    if (!arena) {
+        return;
+    }
 
+    arena->offset = 0;
 }
 
 void arena_destroy(arena_t *arena) {
