@@ -1,6 +1,7 @@
 #include "arena/arena.h"
 
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 /*
@@ -63,3 +64,5 @@ void arena_destroy(arena_t *arena) {
     free(arena->buffer);
     free(arena);
 }
+
+
