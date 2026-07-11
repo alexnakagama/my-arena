@@ -14,35 +14,35 @@ struct arena_t {
     size_t offset;
 };
 
-arena_t *arena_create(size_t s) {
+arena_t *arena_create(size_t size) {
     arena_t *arena = malloc(sizeof(arena_t));
     if (!arena) {
         return NULL;
     }
 
-    arena->buffer = malloc(s);
+    arena->buffer = malloc(size);
     if (!arena->buffer) {
         free(arena);
         return NULL;
     }
 
-    arena->capacity = s;
+    arena->capacity = size;
     arena->offset = 0;
 
     return arena;
 }
 
-void *arena_alloc(arena_t *arena, size_t s) {
+void *arena_alloc(arena_t *arena, size_t size) {
     if (!arena) {
         return NULL;
     }
 
-    if (arena->offset + s > arena->capacity) {
+    if (arena->offset + size > arena->capacity) {
         return NULL;
     }
 
     void *address = (unsigned char *)arena->buffer + arena->offset;
-    arena->offset += s;
+    arena->offset += size;
 
     return address;
 }
