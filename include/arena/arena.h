@@ -5,8 +5,8 @@
 
 typedef struct arena_t arena_t;
 
-arena_t *arena_create(size_t s);
-void *arena_alloc(arena_t *arena, size_t s);
+arena_t *arena_create(size_t size);
+void *arena_alloc(arena_t *arena, size_t size);
 void arena_reset(arena_t *arena);
 void arena_destroy(arena_t *arena);
 
