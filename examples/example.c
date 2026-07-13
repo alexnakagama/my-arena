@@ -7,5 +7,7 @@ int main(void) {
 
     arena_alloc(arena, 20);
 
+    arena_print(arena);
+
     return 0;
 }
