@@ -13,9 +13,9 @@ void arena_destroy(arena_t *arena);
 size_t arena_used(const arena_t *arena);
 size_t arena_available(const arena_t *arena);
 size_t arena_capacity(const arena_t *arena);
-void arena_print(const arena_t *arena);
+void arena_info(const arena_t *arena);
 
-void *arena_calloc(arena_t *arena, size_t size);
+void *arena_calloc(arena_t *arena, size_t count, size_t size);
 
 #endif
 

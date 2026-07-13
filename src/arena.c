@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /*
     * void *buffer (points to the large block of memory that we allocated, here the arena starts)
@@ -89,15 +90,32 @@ size_t arena_capacity(const arena_t *arena) {
     return arena->capacity;
 }
 
-void arena_print(const arena_t *arena) {
+void arena_info(const arena_t *arena) {
     if (!arena) {
         return;
     }
 
+    size_t available = arena->capacity - arena->offset;
+    double usage = ((double)arena->offset / arena->capacity) * 100.0;
+
     printf("---Arena---\n");
     printf("Buffer: %p\n", arena->buffer);
-    printf("Offset: %zu\n", arena->offset);
-    printf("Capacity: %zu\n", arena->capacity);
-    printf("Space available: %zu\n", arena->capacity - arena->offset);
+    printf("Used: %zu bytes\n", arena->offset);
+    printf("Capacity: %zu bytes\n", arena->capacity);
+    printf("Available: %zu bytes\n", available);
+    printf("Usage: %.2f%%\n", usage);
+}
+
+void *arena_calloc(arena_t *arena, size_t count, size_t size) {
+    size_t total = count * size;
+
+    void *ptr = arena_alloc(arena, total);
+    if (!ptr) {
+        return NULL;
+    }
+
+    memset(ptr, 0, total);
+
+    return ptr;
 }
 
