@@ -72,3 +72,9 @@ size_t arena_used(const arena_t *arena) {
 
     return arena->offset;
 }
+
+size_t arena_available(const arena_t *arena) {
+    if (!arena) {
+        return 0;
+    }
+}
