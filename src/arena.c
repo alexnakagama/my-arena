@@ -64,5 +64,3 @@ void arena_destroy(arena_t *arena) {
     free(arena->buffer);
     free(arena);
 }
-
-
