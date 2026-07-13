@@ -100,3 +100,4 @@ void arena_print(const arena_t *arena) {
     printf("Capacity: %zu\n", arena->capacity);
     printf("Space available: %zu\n", arena->capacity - arena->offset);
 }
+
