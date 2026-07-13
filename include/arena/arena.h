@@ -14,6 +14,8 @@ size_t arena_used(const arena_t *arena);
 size_t arena_available(const arena_t *arena);
 size_t arena_capacity(const arena_t *arena);
 
+void arena_print(const arena_t *arena);
+
 #endif
 
 /*
