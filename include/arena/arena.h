@@ -17,6 +17,8 @@ void arena_info(const arena_t *arena);
 
 void *arena_calloc(arena_t *arena, size_t count, size_t size);
 
+void arena_dump(const arena_t *arena);
+
 #endif
 
 /*

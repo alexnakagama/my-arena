@@ -5,9 +5,12 @@ int main(void) {
 
     arena = arena_create(1024);
 
-    arena_alloc(arena, 20);
+    int *number = arena_alloc(arena, sizeof(int));
+
+    *number = 42;
 
     arena_info(arena);
+    arena_dump(arena);
 
     return 0;
 }

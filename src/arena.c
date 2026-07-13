@@ -16,6 +16,9 @@ struct arena_t {
     size_t offset;
 };
 
+/*
+    * Allocates big memory region that will be used to store data
+*/ 
 arena_t *arena_create(size_t size) {
     arena_t *arena = malloc(sizeof(arena_t));
     if (!arena) {
@@ -117,5 +120,17 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     memset(ptr, 0, total);
 
     return ptr;
+}
+
+void arena_dump(const arena_t *arena) {
+    if (!arena) {
+        return;
+    }
+
+    unsigned char *buffer = arena->buffer;
+
+    for (size_t i=0; i<arena->offset; i++) {
+        printf("%02x ", buffer[i]);
+    }
 }
 
