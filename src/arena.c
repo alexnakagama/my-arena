@@ -6,9 +6,9 @@
 #include <string.h>
 
 /*
-    * void *buffer (points to the large block of memory that we allocated, here the arena starts)
-    * size_t capacity (indicates how many bytes has the block in total)
-    * size_t offset (indicates how many bytes were already utilized)
+ * void *buffer (points to the large block of memory that we allocated, here the arena starts)
+ * size_t capacity (indicates how many bytes has the block in total)
+ * size_t offset (indicates how many bytes were already utilized)
 */
 struct arena_t {
     void *buffer;
@@ -17,8 +17,8 @@ struct arena_t {
 };
 
 /*
-    * Allocates big memory region that will be used to store data
-    * Pass the total size of the arena. arena->capacity = size
+ * Allocates big memory region that will be used to store data
+ * Pass the total size of the arena. arena->capacity = size
 */ 
 arena_t *arena_create(size_t size) {
     arena_t *arena = malloc(sizeof(arena_t));
