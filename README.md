@@ -222,6 +222,3 @@ This project was built to explore:
 - Unit tests
 - Thread-safe variants
 
-## License
-
-MIT License
