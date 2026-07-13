@@ -64,3 +64,11 @@ void arena_destroy(arena_t *arena) {
     free(arena->buffer);
     free(arena);
 }
+
+size_t arena_used(const arena_t *arena) {
+    if (!arena) {
+        return 0;
+    }
+
+    return arena->offset;
+}
