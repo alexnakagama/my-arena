@@ -77,4 +77,8 @@ size_t arena_available(const arena_t *arena) {
     if (!arena) {
         return 0;
     }
+
+    size_t available = arena->capacity - arena->offset;
+
+    return available;
 }
