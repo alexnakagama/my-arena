@@ -88,3 +88,9 @@ size_t arena_capacity(const arena_t *arena) {
 
     return arena->capacity;
 }
+
+void arena_print(const arena_t *arena) {
+    if (!arena) {
+        return;
+    }
+}
