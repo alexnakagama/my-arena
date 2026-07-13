@@ -93,8 +93,10 @@ void arena_print(const arena_t *arena) {
     if (!arena) {
         return;
     }
+
     printf("---Arena---\n");
     printf("Buffer: %p\n", arena->buffer);
     printf("Offset: %zu\n", arena->offset);
-    printf("Capacity%zu\n", arena->capacity);
+    printf("Capacity: %zu\n", arena->capacity);
+    printf("Space available: %zu\n", arena->capacity - arena->offset);
 }
