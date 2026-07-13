@@ -18,6 +18,7 @@ struct arena_t {
 
 /*
     * Allocates big memory region that will be used to store data
+    * Pass the total size of the arena. arena->capacity = size
 */ 
 arena_t *arena_create(size_t size) {
     arena_t *arena = malloc(sizeof(arena_t));
@@ -129,7 +130,7 @@ void arena_dump(const arena_t *arena) {
 
     unsigned char *buffer = arena->buffer;
 
-    for (size_t i=0; i<arena->offset; i++) {
+    for (size_t i = 0; i < arena->offset; i++) {
         printf("%02x ", buffer[i]);
     }
 }
