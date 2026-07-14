@@ -155,3 +155,4 @@ char *arena_strdup(arena_t *arena, const char *str) {
 
     return str_ptr;
 }
+
