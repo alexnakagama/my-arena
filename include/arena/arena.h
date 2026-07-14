@@ -18,6 +18,8 @@ size_t arena_capacity(const arena_t *arena);
 void arena_info(const arena_t *arena);
 void arena_dump(const arena_t *arena);
 
+char *arena_strdup(arena_t *arena, const char *str);
+
 #endif
 
 /*
