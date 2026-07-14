@@ -135,3 +135,23 @@ void arena_dump(const arena_t *arena) {
     }
 }
 
+char *arena_strdup(arena_t *arena, const char *str) {
+    if (!arena) {
+        return NULL;
+    }
+
+    if (!str) {
+        return NULL;
+    }
+    
+    size_t str_len = strlen(str) + 1;
+
+    char *str_ptr = arena_alloc(arena, str_len);
+    if (!str_ptr) {
+        return NULL;
+    }
+
+    strcpy(str_ptr, str);
+
+    return str_ptr;
+}
