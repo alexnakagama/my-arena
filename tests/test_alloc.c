@@ -4,15 +4,12 @@
 
 int main(void) {
     arena_t *arena = arena_create(1024);
-
     assert(arena != NULL);
 
     int *number = arena_alloc(arena, sizeof(int));
-
     assert(number != NULL);
 
     *number = 40;
-
     assert(*number == 40);
 
     assert(arena_used(arena) == sizeof(int));
