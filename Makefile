@@ -12,10 +12,11 @@ CFLAGS = -std=c11 \
 LIB_SRC = src/arena.c
 
 EXAMPLE_SRC = examples/basic.c
-TEST_CREATE_SRC = tests/test_create.c
-
 EXAMPLE = build/examples/basic
-TEST_CREATE = build/tests/test_create
+
+TEST_SRCS = $(wildcard tests/*.c)
+
+TESTS = $(patsubst tests/%.c,build/tests/%,$(TEST_SRCS))
 
 all: example
 
@@ -23,14 +24,17 @@ example: $(EXAMPLE)
 
 $(EXAMPLE):
 	mkdir -p build/examples
-	$(CC) $(CFLAGS) $(LIB_SRC) $(EXAMPLE_SRC) -o $(EXAMPLE)
+	$(CC) $(CFLAGS) $(LIB_SRC) $(EXAMPLE_SRC) -o $@
 
-test: $(TEST_CREATE)
-	./$(TEST_CREATE)
-
-$(TEST_CREATE):
+build/tests/%: tests/%.c
 	mkdir -p build/tests
-	$(CC) $(CFLAGS) $(LIB_SRC) $(TEST_CREATE_SRC) -o $(TEST_CREATE)
+	$(CC) $(CFLAGS) $(LIB_SRC) $< -o $@
+
+test: $(TESTS)
+	@for test in $(TESTS); do \
+		echo "Running $$test..."; \
+		./$$test; \
+	done
 
 clean:
 	rm -rf build
