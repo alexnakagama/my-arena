@@ -5,6 +5,9 @@
 int main(void) {
     arena_t *arena = arena_create(1024);
     assert(arena != NULL);
+    assert(arena_used(arena) == 0);
+    assert(arena_capacity(arena) == 1024);
+    assert(arena_available(arena) == 1024);
 
     int *n = arena_alloc(arena, sizeof(int));
     assert(n != NULL);
@@ -12,12 +15,17 @@ int main(void) {
     *n = 40;
     assert(*n == 40);
     assert(arena_available(arena) == 1024 - sizeof(int));
-    assert(arena_capacity(arena) == 1024);
 
     arena_reset(arena);
-    assert(arena_capacity(arena) == 1024);
     assert(arena_available(arena) == 1024);
     assert(arena_used(arena) == 0);
+
+    int *num = arena_alloc(arena, sizeof(int));
+    assert(num != NULL);
+
+    *num = 41;
+    assert(*num == 41);
+    assert(arena_available(arena) == 1024 - sizeof(int));
 
     arena_destroy(arena);
 
@@ -25,3 +33,4 @@ int main(void) {
 
     return 0;
 }
+
