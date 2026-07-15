@@ -17,8 +17,10 @@ struct arena_t {
 };
 
 /*
- * Allocates big memory region that will be used to store data
- * Pass the total size of the arena. arena->capacity = size
+ * Creates a new arena
+ * 
+ * @param size Number of bytes to reserve.
+ * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
     arena_t *arena = malloc(sizeof(arena_t));
@@ -38,6 +40,12 @@ arena_t *arena_create(size_t size) {
     return arena;
 }
 
+/*
+ * Allocates memory on the arena
+ *
+ * @param size Number of bytes to allocate.
+ * @return pointer to void
+*/
 void *arena_alloc(arena_t *arena, size_t size) {
     if (!arena) {
         return NULL;
@@ -53,6 +61,12 @@ void *arena_alloc(arena_t *arena, size_t size) {
     return address;
 }
 
+/*
+ * Resets the arena.
+ *
+ * @param
+ * @return void
+*/
 void arena_reset(arena_t *arena) {
     if (!arena) {
         return;
