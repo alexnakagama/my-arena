@@ -131,7 +131,7 @@ void arena_dump(const arena_t *arena) {
     unsigned char *buffer = arena->buffer;
 
     for (size_t i = 0; i < arena->offset; i++) {
-        printf("%02x ", buffer[i]);
+        printf("%02x\n", buffer[i]);
     }
 }
 
