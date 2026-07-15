@@ -9,12 +9,18 @@ int main(void) {
     *number = 42;
 
     char *name = arena_strdup(arena, "Alex");
+    char *city = arena_strdup(arena, "Buenos Aires");
 
     arena_info(arena);
 
     arena_dump(arena);
 
-    printf("%s\n", name);
+    printf("Name: %s\n", name);
+    printf("City: %s\n", city);
+
+    arena_info(arena);
+
+    arena_dump(arena);
 
     arena_destroy(arena);
 
