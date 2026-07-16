@@ -23,12 +23,12 @@ struct arena_t {
  * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
-    arena_t *arena = ARENA_MALLOC(sizeof(arena_t));
+    arena_t *arena = BT_ARENA_MALLOC(sizeof(arena_t));
     if (!arena) {
         return NULL;
     }
 
-    arena->buffer = ARENA_MALLOC(size);
+    arena->buffer = BT_ARENA_MALLOC(size);
     if (!arena->buffer) {
         free(arena);
         return NULL;
@@ -80,8 +80,8 @@ void arena_destroy(arena_t *arena) {
         return;
     }
     
-    ARENA_FREE(arena->buffer);
-    ARENA_FREE(arena);
+    BT_ARENA_FREE(arena->buffer);
+    BT_ARENA_FREE(arena);
 }
 
 size_t arena_used(const arena_t *arena) {
