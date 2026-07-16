@@ -16,8 +16,10 @@ int main(void) {
     for (size_t i = 0; i < count; i++) {
         assert(numbers[i] == 0);
     }
-    assert(arena_used(arena) == count * sizeof(int));
-    assert(arena_available(arena) == 1024 - (count * sizeof(int)));
+
+    size_t total = count * sizeof(int);
+    assert(arena_used(arena) == total);
+    assert(arena_available(arena) == 1024 - total);
 
     numbers[0] = 10; 
     assert(numbers[0] == 10);
