@@ -102,6 +102,12 @@ void arena_reset(arena_t *arena) {
     arena->offset = 0;
 }
 
+/*
+ * Destroys the arena
+ *
+ * @param
+ * @return void
+*/
 void arena_destroy(arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
@@ -118,6 +124,12 @@ void arena_destroy(arena_t *arena) {
     BT_ARENA_FREE(arena);
 }
 
+/*
+ * It shows how much the arena is used
+ *
+ * @param 
+ * @return size_t
+*/
 size_t arena_used(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
