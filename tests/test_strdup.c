@@ -15,7 +15,7 @@ int main(void){
     size_t str_length = strlen("hello") + 1;
     assert(arena_used(arena) == str_length);
     assert(arena_available(arena) == 1024 - str_length);
-    
+
     arena_destroy(arena);
 
     printf("test_strdup.c PASSED\n");
