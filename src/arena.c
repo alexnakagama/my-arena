@@ -1,9 +1,8 @@
-#include "arena/arena.h"
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "arena/arena.h"
 
 /*
  * void *buffer (points to the large block of memory that we allocated, here the arena starts)
@@ -121,6 +120,9 @@ void arena_destroy(arena_t *arena) {
 
 size_t arena_used(const arena_t *arena) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return 0;
     }
 
@@ -129,6 +131,9 @@ size_t arena_used(const arena_t *arena) {
 
 size_t arena_available(const arena_t *arena) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return 0;
     }
 
@@ -137,6 +142,9 @@ size_t arena_available(const arena_t *arena) {
 
 size_t arena_capacity(const arena_t *arena) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return 0;
     }
 
@@ -145,6 +153,9 @@ size_t arena_capacity(const arena_t *arena) {
 
 void arena_info(const arena_t *arena) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return;
     }
 
@@ -161,6 +172,9 @@ void arena_info(const arena_t *arena) {
 
 void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return NULL;
     }
 
@@ -182,6 +196,9 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
 
 void arena_dump(const arena_t *arena) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return;
     }
 
@@ -194,10 +211,16 @@ void arena_dump(const arena_t *arena) {
 
 char *arena_strdup(arena_t *arena, const char *str) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return NULL;
     }
 
     if (!str) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: string literal is NULL\n");
+#endif
         return NULL;
     }
     
@@ -205,10 +228,13 @@ char *arena_strdup(arena_t *arena, const char *str) {
 
     char *str_ptr = arena_alloc(arena, str_len);
     if (!str_ptr) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation to allocate %zu bytes for string\n", str_len);
+#endif
         return NULL;
     }
 
-    strcpy(str_ptr, str);
+    memcpy(str_ptr, str, str_len);
 
     return str_ptr;
 }
