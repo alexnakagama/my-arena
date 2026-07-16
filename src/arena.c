@@ -23,18 +23,18 @@ struct arena_t {
  * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocating %zu bytes\n", size);
-#endif
-
     arena_t *arena = BT_ARENA_MALLOC(sizeof(arena_t));
     if (!arena) {
         return NULL;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocating %zu bytes\n", size);
+#endif
+
     arena->buffer = BT_ARENA_MALLOC(size);
     if (!arena->buffer) {
-        free(arena);
+        BT_ARENA_FREE(arena);
         return NULL;
     }
 
@@ -51,19 +51,20 @@ arena_t *arena_create(size_t size) {
  * @return pointer to void
 */
 void *arena_alloc(arena_t *arena, size_t size) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocating %zu bytes\n", size);
-#endif
-
     if (!arena) {
         return NULL;
     }
 
-    if (arena->offset + size > arena->capacity) {
+    if (size > arena->capacity - arena->offset) {
         return NULL;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocating %zu bytes\n", size);
+#endif
+
     void *address = (unsigned char *)arena->buffer + arena->offset;
+
     arena->offset += size;
 
     return address;
@@ -76,26 +77,26 @@ void *arena_alloc(arena_t *arena, size_t size) {
  * @return void
 */
 void arena_reset(arena_t *arena) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] is reseting\n");
-#endif
-
     if (!arena) {
         return;
     }
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is reseting\n");
+#endif
 
     arena->offset = 0;
 }
 
 void arena_destroy(arena_t *arena) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] is destroying\n");
-#endif
-
     if (!arena) {
         return;
     }
-    
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is destroying\n");
+#endif
+   
     BT_ARENA_FREE(arena->buffer);
     BT_ARENA_FREE(arena);
 }
