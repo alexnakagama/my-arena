@@ -51,6 +51,10 @@ arena_t *arena_create(size_t size) {
  * @return pointer to void
 */
 void *arena_alloc(arena_t *arena, size_t size) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocating %zu bytes\n", size);
+#endif
+
     if (!arena) {
         return NULL;
     }
@@ -137,7 +141,15 @@ void arena_info(const arena_t *arena) {
 }
 
 void *arena_calloc(arena_t *arena, size_t count, size_t size) {
+    if (!arena) {
+        return NULL;
+    }
+
     size_t total = count * size;
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocating a total of %zu bytes\n", total);
+#endif
 
     void *ptr = arena_alloc(arena, total);
     if (!ptr) {
