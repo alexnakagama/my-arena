@@ -16,6 +16,11 @@ int main(void){
     assert(arena_used(arena) == str_length);
     assert(arena_available(arena) == 1024 - str_length);
 
+    char *copy_str = "hello";
+    for (size_t i = 0; i < strlen("hello"); i++) {
+        assert(*my_str == *copy_str);
+    }
+
     arena_destroy(arena);
 
     printf("test_strdup.c PASSED\n");
