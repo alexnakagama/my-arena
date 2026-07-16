@@ -2,6 +2,15 @@
 #define ARENA_H
 
 #include <stddef.h>
+#include <stdlib.h>
+
+#ifndef ARENA_MALLOC
+#define ARENA_MALLOC malloc
+#endif
+
+#ifndef ARENA_FREE
+#define ARENA_FREE free
+#endif
 
 typedef struct arena_t arena_t;
 
