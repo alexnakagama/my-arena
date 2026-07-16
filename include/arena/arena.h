@@ -1,5 +1,5 @@
-#ifndef ARENA_H
-#define ARENA_H
+#ifndef BT_ARENA_H
+#define BT_ARENA_H
 
 #include <stddef.h>
 #include <stdlib.h>
