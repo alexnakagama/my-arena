@@ -23,6 +23,10 @@ struct arena_t {
  * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocating %zu bytes\n", size);
+#endif
+
     arena_t *arena = BT_ARENA_MALLOC(sizeof(arena_t));
     if (!arena) {
         return NULL;

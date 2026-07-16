@@ -4,6 +4,10 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+#ifndef BT_ARENA_DEBUG
+#define BT_ARENA_DEBUG 0
+#endif 
+
 #ifndef BT_ARENA_MALLOC
 #define BT_ARENA_MALLOC malloc
 #endif
