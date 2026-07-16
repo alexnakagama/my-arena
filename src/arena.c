@@ -23,12 +23,12 @@ struct arena_t {
  * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
-    arena_t *arena = malloc(sizeof(arena_t));
+    arena_t *arena = ARENA_MALLOC(sizeof(arena_t));
     if (!arena) {
         return NULL;
     }
 
-    arena->buffer = malloc(size);
+    arena->buffer = ARENA_MALLOC(size);
     if (!arena->buffer) {
         free(arena);
         return NULL;
