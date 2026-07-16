@@ -29,7 +29,7 @@ arena_t *arena_create(size_t size) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] allocating %zu bytes\n", size);
+printf("[ARENA] creating arena with %zu bytes\n", size);
 #endif
 
     arena->buffer = BT_ARENA_MALLOC(size);
@@ -60,7 +60,7 @@ void *arena_alloc(arena_t *arena, size_t size) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] allocating %zu bytes\n", size);
+printf("[ARENA] allocating %zu bytes\n", size);
 #endif
 
     void *address = (unsigned char *)arena->buffer + arena->offset;
@@ -82,7 +82,7 @@ void arena_reset(arena_t *arena) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] is reseting\n");
+printf("[ARENA] resetting\n");
 #endif
 
     arena->offset = 0;
@@ -94,7 +94,7 @@ void arena_destroy(arena_t *arena) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] is destroying\n");
+printf("[ARENA] destroying\n");
 #endif
    
     BT_ARENA_FREE(arena->buffer);
@@ -148,14 +148,14 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
 
     size_t total = count * size;
 
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocating a total of %zu bytes\n", total);
-#endif
-
     void *ptr = arena_alloc(arena, total);
     if (!ptr) {
         return NULL;
     }
+
+#if BT_ARENA_DEBUG
+printf("[ARENA] calloc a total of %zu bytes\n", total);
+#endif
 
     memset(ptr, 0, total);
 
