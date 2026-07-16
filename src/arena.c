@@ -80,8 +80,8 @@ void arena_destroy(arena_t *arena) {
         return;
     }
     
-    free(arena->buffer);
-    free(arena);
+    ARENA_FREE(arena->buffer);
+    ARENA_FREE(arena);
 }
 
 size_t arena_used(const arena_t *arena) {

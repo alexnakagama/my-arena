@@ -4,12 +4,12 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-#ifndef ARENA_MALLOC
-#define ARENA_MALLOC malloc
+#ifndef BT_ARENA_MALLOC
+#define BT_ARENA_MALLOC malloc
 #endif
 
-#ifndef ARENA_FREE
-#define ARENA_FREE free
+#ifndef BT_ARENA_FREE
+#define BT_ARENA_FREE free
 #endif
 
 typedef struct arena_t arena_t;
