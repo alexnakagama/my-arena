@@ -80,6 +80,10 @@ void arena_reset(arena_t *arena) {
 }
 
 void arena_destroy(arena_t *arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is destroying\n");
+#endif
+
     if (!arena) {
         return;
     }
