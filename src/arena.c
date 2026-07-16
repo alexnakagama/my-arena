@@ -25,15 +25,21 @@ struct arena_t {
 arena_t *arena_create(size_t size) {
     arena_t *arena = BT_ARENA_MALLOC(sizeof(arena_t));
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return NULL;
     }
 
 #if BT_ARENA_DEBUG
-printf("[ARENA] creating arena with %zu bytes\n", size);
+    printf("[ARENA] creating arena with %zu bytes\n", size);
 #endif
 
     arena->buffer = BT_ARENA_MALLOC(size);
     if (!arena->buffer) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] buffer allocation failed: buffer is NULL\n");
+#endif
         BT_ARENA_FREE(arena);
         return NULL;
     }
@@ -60,7 +66,7 @@ void *arena_alloc(arena_t *arena, size_t size) {
     }
 
 #if BT_ARENA_DEBUG
-printf("[ARENA] allocating %zu bytes\n", size);
+    printf("[ARENA] allocating %zu bytes\n", size);
 #endif
 
     void *address = (unsigned char *)arena->buffer + arena->offset;
@@ -82,7 +88,7 @@ void arena_reset(arena_t *arena) {
     }
 
 #if BT_ARENA_DEBUG
-printf("[ARENA] resetting\n");
+    printf("[ARENA] resetting\n");
 #endif
 
     arena->offset = 0;
@@ -94,7 +100,7 @@ void arena_destroy(arena_t *arena) {
     }
 
 #if BT_ARENA_DEBUG
-printf("[ARENA] destroying\n");
+    printf("[ARENA] destroying\n");
 #endif
    
     BT_ARENA_FREE(arena->buffer);
@@ -154,7 +160,7 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     }
 
 #if BT_ARENA_DEBUG
-printf("[ARENA] calloc a total of %zu bytes\n", total);
+    printf("[ARENA] calloc a total of %zu bytes\n", total);
 #endif
 
     memset(ptr, 0, total);
