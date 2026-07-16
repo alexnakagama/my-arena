@@ -18,10 +18,6 @@ int main(void) {
     printf("Name: %s\n", name);
     printf("City: %s\n", city);
 
-    arena_info(arena);
-
-    arena_dump(arena);
-
     arena_destroy(arena);
 
     return 0;
