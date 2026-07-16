@@ -72,6 +72,10 @@ void *arena_alloc(arena_t *arena, size_t size) {
  * @return void
 */
 void arena_reset(arena_t *arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is reseting\n");
+#endif
+
     if (!arena) {
         return;
     }
