@@ -58,10 +58,16 @@ arena_t *arena_create(size_t size) {
 */
 void *arena_alloc(arena_t *arena, size_t size) {
     if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
         return NULL;
     }
 
     if (size > arena->capacity - arena->offset) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: not enough memory (requested: %zu, available: %zu)\n", size, arena->capacity - arena->offset);
+#endif
         return NULL;
     }
 
