@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -304,5 +305,17 @@ char *arena_strdup(arena_t *arena, const char *str) {
     memcpy(str_ptr, str, str_len);
 
     return str_ptr;
+}
+
+bool arena_is_empty(const arena_t *arena) {
+    if (!arena) {
+        return NULL;
+    }
+
+    if (arena->offset != 0) {
+        return false;
+    }
+
+    return true;
 }
 
