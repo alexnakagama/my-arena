@@ -309,7 +309,10 @@ char *arena_strdup(arena_t *arena, const char *str) {
 
 bool arena_is_empty(const arena_t *arena) {
     if (!arena) {
-        return NULL;
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
+        return false;
     }
 
     if (arena->offset != 0) {
