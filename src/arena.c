@@ -1,3 +1,6 @@
+// if you want debug mode type:
+// #define BT_ARENA_DEBUG 1
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
