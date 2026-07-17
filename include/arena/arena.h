@@ -33,8 +33,13 @@ void arena_info(const arena_t *arena);
 void arena_dump(const arena_t *arena);
 
 char *arena_strdup(arena_t *arena, const char *str);
+//todo
+char *arena_strndup(arena_t *arena, const char *str, size_t n);
 
 bool arena_is_empty(const arena_t *arena);
+
+// todo
+void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment);
 
 #endif
 
