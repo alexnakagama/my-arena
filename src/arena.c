@@ -265,6 +265,17 @@ void arena_dump(const arena_t *arena) {
     }
 }
 
+/*
+ * Duplicates a null terminated string into the arena
+ * 
+ * Allocates enough memory to store the string including the null terminator
+ * Copies the conent into the arena, and returns a pointer to the dup string
+ *
+ * @param arena Arena allocator
+ * @param str Null-terminated string to duplicate
+ *
+ * @return Pointer to the dup string, or NULL if arena is NULL, the input string is NULL, or allocation fails
+*/
 char *arena_strdup(arena_t *arena, const char *str) {
     if (!arena) {
 #if BT_ARENA_DEBUG
