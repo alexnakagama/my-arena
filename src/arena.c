@@ -19,6 +19,7 @@ struct arena_t {
  * Creates a new arena
  * 
  * @param size Number of bytes to reserve.
+ *
  * @return pointer to the arena, or NULL if it fails.
 */ 
 arena_t *arena_create(size_t size) {
@@ -52,7 +53,9 @@ arena_t *arena_create(size_t size) {
 /*
  * Allocates memory on the arena
  *
+ * @param arena Arena allocator.
  * @param size Number of bytes to allocate.
+ *
  * @return pointer to void
 */
 void *arena_alloc(arena_t *arena, size_t size) {
@@ -84,7 +87,8 @@ void *arena_alloc(arena_t *arena, size_t size) {
 /*
  * Resets the arena.
  *
- * @param
+ * @param arena Arena allocator
+ *
  * @return void
 */
 void arena_reset(arena_t *arena) {
@@ -105,7 +109,8 @@ void arena_reset(arena_t *arena) {
 /*
  * Destroys the arena
  *
- * @param
+ * @param arena Arena allocator
+ *
  * @return void
 */
 void arena_destroy(arena_t *arena) {
@@ -127,7 +132,8 @@ void arena_destroy(arena_t *arena) {
 /*
  * It shows how much the arena is used
  *
- * @param 
+ * @param arena Arena allocator
+ *
  * @return size_t
 */
 size_t arena_used(const arena_t *arena) {
@@ -144,7 +150,8 @@ size_t arena_used(const arena_t *arena) {
 /*
  * Shows how much bytes left are available on the arena
  *
- * @param 
+ * @param arena Arena allocator 
+ *
  * @return size_t
 */
 size_t arena_available(const arena_t *arena) {
@@ -161,7 +168,8 @@ size_t arena_available(const arena_t *arena) {
 /*
  * Shows the arena capacity
  *
- * @param 
+ * @param arena Arena allocator 
+ *
  * @return size_t
 */
 size_t arena_capacity(const arena_t *arena) {
@@ -175,6 +183,13 @@ size_t arena_capacity(const arena_t *arena) {
     return arena->capacity;
 }
 
+/*
+ * Prints the arena information
+ *
+ * @param arena Arena allocator, const because it state doesnt change
+ *
+ * @return void
+*/
 void arena_info(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
@@ -194,6 +209,16 @@ void arena_info(const arena_t *arena) {
     printf("Usage: %.2f%%\n", usage);
 }
 
+/*
+ * Allocates memory for an array of 'count' elements, each 'size' bytes
+ * and initializes all bytes to zero
+ *
+ * @param arena Arena allocator
+ * @param count Number of elements
+ * @param size Size of each element in bytes
+ *
+ * @return Pointer to the allocated memory or NULL if it fails
+*/
 void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     if (!arena) {
 #if BT_ARENA_DEBUG
@@ -218,6 +243,13 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     return ptr;
 }
 
+/*
+ * Prints the content of the used portion of the arena as hexadecimal bytes
+ *
+ * @param arena Arena allocator
+ *
+ * @return void
+*/
 void arena_dump(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
