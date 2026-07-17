@@ -307,6 +307,13 @@ char *arena_strdup(arena_t *arena, const char *str) {
     return str_ptr;
 }
 
+/*
+ * Checks whether the arena contains no allocated data.
+ *
+ * @param arena Arena allocator.
+ *
+ * @return true if the arena is empty, false otherwise.
+ */
 bool arena_is_empty(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
