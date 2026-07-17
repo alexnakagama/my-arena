@@ -158,6 +158,12 @@ size_t arena_available(const arena_t *arena) {
     return arena->capacity - arena->offset;
 }
 
+/*
+ * Shows the arena capacity
+ *
+ * @param 
+ * @return size_t
+*/
 size_t arena_capacity(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
