@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #ifndef BT_ARENA_DEBUG
 #define BT_ARENA_DEBUG 0
@@ -32,6 +33,8 @@ void arena_info(const arena_t *arena);
 void arena_dump(const arena_t *arena);
 
 char *arena_strdup(arena_t *arena, const char *str);
+
+bool arena_is_empty(const arena_t *arena);
 
 #endif
 
