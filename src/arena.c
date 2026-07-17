@@ -141,6 +141,12 @@ size_t arena_used(const arena_t *arena) {
     return arena->offset;
 }
 
+/*
+ * Shows how much bytes left are available on the arena
+ *
+ * @param 
+ * @return size_t
+*/
 size_t arena_available(const arena_t *arena) {
     if (!arena) {
 #if BT_ARENA_DEBUG
