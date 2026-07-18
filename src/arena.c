@@ -52,7 +52,7 @@ arena_t *arena_create(size_t size) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] arena creting\n");
+    printf("[ARENA] arena creating\n");
 #endif
 
     arena->capacity = size;
