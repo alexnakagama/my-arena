@@ -1,5 +1,5 @@
 // if you want debug mode type:
-// #define BT_ARENA_DEBUG 1
+#define BT_ARENA_DEBUG 1
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -267,7 +267,7 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
 
     if (!ptr) {
 #if BT_ARENA_DEBUG
-    printf("[ARENA] failed: pointer is NULL\n", total);
+    printf("[ARENA] failed: pointer is NULL\n");
 #endif
         return NULL;
     }
