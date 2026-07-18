@@ -300,7 +300,7 @@ char *arena_strdup(arena_t *arena, const char *str) {
     char *str_ptr = arena_alloc(arena, str_len);
     if (!str_ptr) {
 #if BT_ARENA_DEBUG
-    printf("[ARENA] allocation to allocate %zu bytes for string\n", str_len);
+    printf("[ARENA] allocation failed to allocate %zu bytes for string\n", str_len);
 #endif
         return NULL;
     }
@@ -326,6 +326,9 @@ bool arena_is_empty(const arena_t *arena) {
     }
 
     if (arena->offset != 0) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena is empty\n");
+#endif
         return false;
     }
 
