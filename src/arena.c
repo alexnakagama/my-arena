@@ -382,3 +382,44 @@ bool arena_is_empty(const arena_t *arena) {
     return true;
 }
 
+char *arena_strndup(arena_t *arena, const char *str, size_t n) {
+    if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
+        return NULL;
+    }
+
+    if (!str) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: string literal is NULL\n");
+#endif
+        return NULL;
+    }
+
+    size_t str_len = 0;
+
+    while (str_len < n && str[str_len] != '\0') {
+        str_len++;
+    }
+
+    char *str_ptr = arena_alloc(arena, str_len + 1);
+
+    if (!str_ptr) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: not enough space in arena\n");
+#endif
+        return NULL;
+    }
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_strndup succeded\n");
+#endif
+
+    memcpy(str_ptr, str, str_len);
+
+    str_ptr[str_len] = '\0';
+
+    return str_ptr;
+}
+
