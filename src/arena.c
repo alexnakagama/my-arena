@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -231,15 +232,26 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
         return NULL;
     }
 
+    if (count != 0 && size > SIZE_MAX / count) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: size overflow\n");
+#endif
+        return NULL;
+    }
+
     size_t total = count * size;
 
     void *ptr = arena_alloc(arena, total);
+
     if (!ptr) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] failed: pointer is NULL\n", total);
+#endif
         return NULL;
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] calloc a total of %zu bytes\n", total);
+    printf("[ARENA] calloc: allocated and zeroed a total of %zu bytes\n", total);
 #endif
 
     memset(ptr, 0, total);
