@@ -351,6 +351,10 @@ bool arena_is_empty(const arena_t *arena) {
         return false;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is not empty\n");
+#endif
+
     return true;
 }
 
