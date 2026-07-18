@@ -12,7 +12,7 @@ int main(void) {
 
     arena_destroy(arena);
 
-    printf("[TEST] test_create.c PASSED.\n");
+    printf("[TEST] test_create.c PASSED\n");
 
     return 0;
 }
