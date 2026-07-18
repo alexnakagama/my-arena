@@ -29,6 +29,7 @@ struct arena_t {
 */ 
 arena_t *arena_create(size_t size) {
     arena_t *arena = BT_ARENA_MALLOC(sizeof(arena_t));
+
     if (!arena) {
 #if BT_ARENA_DEBUG
     printf("[ARENA] allocation failed: arena is NULL\n");
@@ -41,6 +42,7 @@ arena_t *arena_create(size_t size) {
 #endif
 
     arena->buffer = BT_ARENA_MALLOC(size);
+
     if (!arena->buffer) {
 #if BT_ARENA_DEBUG
     printf("[ARENA] buffer allocation failed: buffer is NULL\n");
@@ -310,6 +312,7 @@ char *arena_strdup(arena_t *arena, const char *str) {
     size_t str_len = strlen(str) + 1;
 
     char *str_ptr = arena_alloc(arena, str_len);
+
     if (!str_ptr) {
 #if BT_ARENA_DEBUG
     printf("[ARENA] allocation failed to allocate %zu bytes for string\n", str_len);
