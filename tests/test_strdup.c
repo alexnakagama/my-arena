@@ -23,7 +23,7 @@ int main(void){
 
     arena_destroy(arena);
 
-    printf("test_strdup.c PASSED\n");
+    printf("[TEST] test_strdup.c PASSED\n");
 
     return 0;
 }

@@ -8,7 +8,7 @@ int main(void) {
 
     arena_destroy(arena);
 
-    printf("test_destroy.c PASSED\n");
+    printf("[TEST] test_destroy.c PASSED\n");
 
     return 0;
 }

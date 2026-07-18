@@ -18,7 +18,7 @@ int main(void) {
 
     arena_destroy(arena);
 
-    printf("test_alloc.c PASSED\n");
+    printf("[TEST] test_alloc.c PASSED\n");
 
     return 0;
 }

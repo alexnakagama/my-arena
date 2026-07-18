@@ -26,7 +26,7 @@ int main(void) {
 
     arena_destroy(arena);
 
-    printf("test_calloc.c PASSED\n");
+    printf("[TEST] test_calloc.c PASSED\n");
 
     return 0;
 }
