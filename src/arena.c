@@ -200,7 +200,7 @@ size_t arena_capacity(const arena_t *arena) {
     }
 
 #if BT_ARENA_DEBUG
-    printf("[ARENA] arena_capacity succeded\n\n");
+    printf("[ARENA] arena_capacity succeded\n");
 #endif
 
     return arena->capacity;
@@ -409,6 +409,4 @@ bool arena_is_empty(const arena_t *arena) {
 
     return true;
 }
-
-
 
