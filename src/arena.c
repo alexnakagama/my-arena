@@ -51,6 +51,10 @@ arena_t *arena_create(size_t size) {
         return NULL;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena creting\n");
+#endif
+
     arena->capacity = size;
     arena->offset = 0;
 
@@ -151,6 +155,10 @@ size_t arena_used(const arena_t *arena) {
         return 0;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_used succeded\n");
+#endif
+
     return arena->offset;
 }
 
@@ -169,6 +177,10 @@ size_t arena_available(const arena_t *arena) {
         return 0;
     }
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_available succeded\n");
+#endif
+
     return arena->capacity - arena->offset;
 }
 
@@ -186,6 +198,10 @@ size_t arena_capacity(const arena_t *arena) {
 #endif
         return 0;
     }
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_capacity succeded\n\n");
+#endif
 
     return arena->capacity;
 }
@@ -207,6 +223,10 @@ void arena_info(const arena_t *arena) {
 
     size_t available = arena->capacity - arena->offset;
     double usage = ((double)arena->offset / arena->capacity) * 100.0;
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_info printing\n");
+#endif
 
     printf("---Arena---\n");
     printf("Buffer: %p\n", arena->buffer);
@@ -277,6 +297,10 @@ void arena_dump(const arena_t *arena) {
     }
 
     unsigned char *buffer = arena->buffer;
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena dump succeded\n");
+#endif
 
     for (size_t i = 0; i < arena->offset; i++) {
         printf("%02x\n", buffer[i]);
