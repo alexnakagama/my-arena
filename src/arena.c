@@ -322,6 +322,10 @@ char *arena_strdup(arena_t *arena, const char *str) {
 
     memcpy(str_ptr, str, str_len);
 
+#if BT_ARENA_DEBUG
+    printf("[ARENA] strdup succeded\n");
+#endif
+
     return str_ptr;
 }
 
