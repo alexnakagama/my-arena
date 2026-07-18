@@ -307,81 +307,6 @@ void arena_dump(const arena_t *arena) {
     }
 }
 
-/*
- * Duplicates a null terminated string into the arena
- * 
- * Allocates enough memory to store the string including the null terminator
- * Copies the conent into the arena, and returns a pointer to the dup string
- *
- * @param arena Arena allocator
- * @param str Null-terminated string to duplicate
- *
- * @return Pointer to the dup string, or NULL if arena is NULL, the input string is NULL, or allocation fails
-*/
-char *arena_strdup(arena_t *arena, const char *str) {
-    if (!arena) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed: arena is NULL\n");
-#endif
-        return NULL;
-    }
-
-    if (!str) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed: string literal is NULL\n");
-#endif
-        return NULL;
-    }
-    
-    size_t str_len = strlen(str) + 1;
-
-    char *str_ptr = arena_alloc(arena, str_len);
-
-    if (!str_ptr) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed to allocate %zu bytes for string\n", str_len);
-#endif
-        return NULL;
-    }
-
-    memcpy(str_ptr, str, str_len);
-
-#if BT_ARENA_DEBUG
-    printf("[ARENA] strdup succeded\n");
-#endif
-
-    return str_ptr;
-}
-
-/*
- * Checks whether the arena contains no allocated data.
- *
- * @param arena Arena allocator.
- *
- * @return true if the arena is empty, false otherwise.
- */
-bool arena_is_empty(const arena_t *arena) {
-    if (!arena) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed: arena is NULL\n");
-#endif
-        return false;
-    }
-
-    if (arena->offset != 0) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] arena is empty\n");
-#endif
-        return false;
-    }
-
-#if BT_ARENA_DEBUG
-    printf("[ARENA] is not empty\n");
-#endif
-
-    return true;
-}
-
 char *arena_strndup(arena_t *arena, const char *str, size_t n) {
     if (!arena) {
 #if BT_ARENA_DEBUG
@@ -422,4 +347,68 @@ char *arena_strndup(arena_t *arena, const char *str, size_t n) {
 
     return str_ptr;
 }
+
+/*
+ * Duplicates a null terminated string into the arena
+ * 
+ * Allocates enough memory to store the string including the null terminator
+ * Copies the conent into the arena, and returns a pointer to the dup string
+ *
+ * @param arena Arena allocator
+ * @param str Null-terminated string to duplicate
+ *
+ * @return Pointer to the dup string, or NULL if arena is NULL, the input string is NULL, or allocation fails
+*/
+char *arena_strdup(arena_t *arena, const char *str) {
+    if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
+        return NULL;
+    }
+
+    if (!str) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: string literal is NULL\n");
+#endif
+        return NULL;
+    }
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena_strdup succeded\n");
+#endif
+
+    return arena_strndup(arena, str, strlen(str));
+}
+
+/*
+ * Checks whether the arena contains no allocated data.
+ *
+ * @param arena Arena allocator.
+ *
+ * @return true if the arena is empty, false otherwise.
+ */
+bool arena_is_empty(const arena_t *arena) {
+    if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
+        return false;
+    }
+
+    if (arena->offset != 0) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] arena is empty\n");
+#endif
+        return false;
+    }
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] is not empty\n");
+#endif
+
+    return true;
+}
+
+
 

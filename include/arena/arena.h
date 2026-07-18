@@ -32,9 +32,8 @@ size_t arena_capacity(const arena_t *arena);
 void arena_info(const arena_t *arena);
 void arena_dump(const arena_t *arena);
 
-char *arena_strdup(arena_t *arena, const char *str);
-//todo
 char *arena_strndup(arena_t *arena, const char *str, size_t n);
+char *arena_strdup(arena_t *arena, const char *str);
 
 bool arena_is_empty(const arena_t *arena);
 
