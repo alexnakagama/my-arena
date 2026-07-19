@@ -410,3 +410,11 @@ bool arena_is_empty(const arena_t *arena) {
     return true;
 }
 
+void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment) {
+    if (!arena) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: arena is NULL\n");
+#endif
+        return NULL;
+    }
+}
