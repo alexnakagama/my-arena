@@ -88,10 +88,17 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
  *
  * @return void* Address of the allocated memory
 */
-void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment) {
+void *arena_alloc_aligned(arena_t *arena, size_t size, size_t alignment) {
     if (!arena || size == 0) {
 #if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed: arena is NULL\n");
+    printf("[ARENA] allocation failed: undefined arguments\n");
+#endif
+        return NULL;
+    }
+
+    if (alignment == 0 || (alignment & (alignment - 1)) != 0) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: alignemnt must be power of two\n");
 #endif
         return NULL;
     }
@@ -103,7 +110,11 @@ void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment) {
         padding++;
     }
 
-    if (arena->offset + padding + size > arena->capacity) {
+    if (padding > arena->capacity - arena->offset || 
+        size > arena->capacity - arena->offset - padding) {
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocation failed: not enough memory\n");
+#endif
         return NULL;
     }
 
@@ -112,6 +123,10 @@ void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment) {
     void *ptr = arena->buffer + arena->offset;
 
     arena->offset += size;
+
+#if BT_ARENA_DEBUG
+    printf("[ARENA] allocated %zu bytes with alignment %zu\n", size, alignment);
+#endif
 
     return ptr;
 }
