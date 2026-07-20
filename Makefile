@@ -9,7 +9,7 @@ CFLAGS = -std=c11 \
           -O0 \
           -Iinclude
 
-LIB_SRC = src/arena.c
+LIB_SRC = $(wildcard src/*.c)
 
 EXAMPLE_SRC = examples/basic.c
 EXAMPLE = build/examples/basic
