@@ -41,7 +41,6 @@ char *arena_strdup(arena_t *arena, const char *str);
 
 bool arena_is_empty(const arena_t *arena);
 
-// todo
 void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment);
 
 #endif
