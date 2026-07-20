@@ -17,7 +17,11 @@
 #define BT_ARENA_FREE free
 #endif
 
-typedef struct arena_t arena_t;
+typedef struct arena_t {
+    unsigned char *buffer;
+    size_t capacity;
+    size_t offset;
+} arena_t;
 
 arena_t *arena_create(size_t size);
 void *arena_alloc(arena_t *arena, size_t size);

@@ -7,18 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "arena/arena.h"
 
-/*
- * void *buffer (points to the large block of memory that we allocated, here the arena starts)
- * size_t capacity (indicates how many bytes has the block in total)
- * size_t offset (indicates how many bytes were already utilized)
-*/
-struct arena_t {
-    unsigned char *buffer;
-    size_t capacity;
-    size_t offset;
-};
+#include "arena/arena.h"
 
 /*
  * Creates a new arena
@@ -279,32 +269,6 @@ void *arena_calloc(arena_t *arena, size_t count, size_t size) {
     memset(ptr, 0, total);
 
     return ptr;
-}
-
-/*
- * Prints the content of the used portion of the arena as hexadecimal bytes
- *
- * @param arena Arena allocator
- *
- * @return void
-*/
-void arena_dump(const arena_t *arena) {
-    if (!arena) {
-#if BT_ARENA_DEBUG
-    printf("[ARENA] allocation failed: arena is NULL\n");
-#endif
-        return;
-    }
-
-    unsigned char *buffer = arena->buffer;
-
-#if BT_ARENA_DEBUG
-    printf("[ARENA] arena dump succeded\n");
-#endif
-
-    for (size_t i = 0; i < arena->offset; i++) {
-        printf("%02x\n", buffer[i]);
-    }
 }
 
 char *arena_strndup(arena_t *arena, const char *str, size_t n) {
