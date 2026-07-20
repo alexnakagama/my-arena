@@ -15,7 +15,7 @@
  * size_t offset (indicates how many bytes were already utilized)
 */
 struct arena_t {
-    void *buffer;
+    unsigned char *buffer;
     size_t capacity;
     size_t offset;
 };
@@ -411,16 +411,36 @@ bool arena_is_empty(const arena_t *arena) {
 }
 
 /*
+ * @param size How many bytes you want
+ * @param alignment Alignment requirement (1, 2, 4, 8, 16)
  *
+ * @return void* Address of the allocated memory
 */
 void *arena_alloc_alligned(arena_t *arena, size_t size, size_t alignment) {
-    if (!arena) {
+    if (!arena || size == 0) {
 #if BT_ARENA_DEBUG
     printf("[ARENA] allocation failed: arena is NULL\n");
 #endif
         return NULL;
     }
     
-    uintptr_t current = (uintptr_t)(arena->buffer + arena->offset);
+    // padding = number of bytes we will skip before allocating
+    size_t padding = 0;
+
+    while ((arena->offset + padding) % alignment != 0) {
+        padding++;
+    }
+
+    if (arena->offset + padding + size > arena->capacity) {
+        return NULL;
+    }
+
+    arena->offset += padding;
+
+    void *ptr = arena->buffer + arena->offset;
+
+    arena->offset += size;
+
+    return ptr;
 }
 
