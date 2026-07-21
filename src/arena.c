@@ -87,7 +87,7 @@ void arena_destroy(arena_t *arena) {
 #if BT_ARENA_DEBUG
     printf("[ARENA] destroyed arena: used=%zu/%zu bytes\n", arena->offset, arena->capacity);
 #endif
-   
+
     BT_ARENA_FREE(arena->buffer);
     BT_ARENA_FREE(arena);
 }
